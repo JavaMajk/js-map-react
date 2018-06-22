@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import MyPlaces from './MyPlaces.json'
 import './App.css'
 import MapCustom from './MapCustom'
-import GoogleMapReact from 'google-map-react';
 import * as zomatoAPI from './ZomatoAPI'
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -29,7 +28,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // this.initializeMaps();
+    this.initializeMaps();
   }
   
   /* *************** CREATE MAP *************** */
@@ -39,7 +38,7 @@ export default class App extends Component {
       center: this.state.center,
       zoom: this.state.zoom,
       mapTypeId: this.state.maptype,
-      
+      styles: MapCustom,
       mapTypeControl: false,
       clickableIcons: false
     });
@@ -136,18 +135,7 @@ export default class App extends Component {
         populateMarkers={this.populateMarkers}
       />
       {/* MAP */}
-      <div className='map' id='map'>
-      <GoogleMapReact
-          bootstrapURLKeys={{ key: `AIzaSyCRFtX0yCoxc-RXXU5u2jGUkaQI2zM1bJk` }}
-          center={this.state.center}
-          zoom={this.state.zoom}
-          options={{
-            styles: MapCustom
-          }}
-        >
-          
-        </GoogleMapReact>
-      </div>
+      <div className='map' id='map' />
     </div>
     );
   }
