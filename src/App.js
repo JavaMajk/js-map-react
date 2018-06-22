@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import MyPlaces from './MyPlaces.json'
 import './App.css'
 import MapCustom from './MapCustom'
-import GoogleMapReact from 'google-map-react';
+import GoogleMapReact from 'google-map-react'
 import * as zomatoAPI from './ZomatoAPI'
+import Marker from './Marker'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
@@ -29,7 +30,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // this.initializeMaps();
   }
   
   /* *************** CREATE MAP *************** */
@@ -145,7 +145,13 @@ export default class App extends Component {
             styles: MapCustom
           }}
         >
-          
+        {this.state.markers.map(marker => 
+          <Marker
+          lat={marker.location.lat}
+          lng={marker.location.lng}
+          />
+)}
+
         </GoogleMapReact>
       </div>
     </div>
