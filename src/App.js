@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import MyPlaces from './MyPlaces.json'
-import './App.css';
+import './App.css'
 import MapCustom from './MapCustom'
+import GoogleMapReact from 'google-map-react';
+import * as zomatoAPI from './ZomatoAPI'
+import Header from './Header'
+import Sidebar from './Sidebar'
 
 export default class App extends Component {
 
@@ -12,139 +16,139 @@ export default class App extends Component {
       lat: 53.13248859999999,
       lng: 23.168840300000056
     },
-    place_formatted: '',
-    place_id: '',
-    place_location: '',
+    myPlaces: [],
     markers: [],
-    typeOfPlace: 'all'
+    placeType: 'All'
   }
 
   componentWillMount() {
-    this.setState({markers: MyPlaces})
+    this.setState({
+      myPlaces: MyPlaces,
+      markers: MyPlaces
+    });
   }
-
 
   componentDidMount() {
-    this.initializeMaps();
+    // this.initializeMaps();
+  }
+  
+  /* *************** CREATE MAP *************** */
+  /* ------------------------------------------ */
+  initializeMaps = () => {
+    const map = new window.google.maps.Map(document.getElementById('map'), {
+      center: this.state.center,
+      zoom: this.state.zoom,
+      mapTypeId: this.state.maptype,
+      
+      mapTypeControl: false,
+      clickableIcons: false
+    });
+    
+    map.addListener('zoom_changed', () => {
+      this.setState({
+        zoom: map.getZoom(),
+      });
+    });
+
+    this.populateMarkers(map);
   }
 
-
-  // BREAK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  
-initializeMaps = () => {
-  let map = new window.google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 53.13248859999999,
-      lng: 23.168840300000056
-    },
-    zoom: this.state.zoom,
-    mapTypeId: this.state.maptype,
-    styles: MapCustom,
-    mapTypeControl: false
-  });
-
-  window.google.maps.event.addListener(map, 'click', function() {
-    infowindow.close();
-});
-
-    let infowindow = new window.google.maps.InfoWindow(); 
+  /* ************ CREATE MARKERS ************** */
+  /* ------------------------------------------ */
+  populateMarkers = (map) => {
+    // const map = map;
     let bounds = new window.google.maps.LatLngBounds();
-    let marker;
-  
-    this.state.markers.map((mark, i) => {
+    let infoWindow, 
+        marker;
+    //Map over markers data to create markers 
+    this.state.markers.forEach((mark, i) => {
+      //Extend bounds to marker on map in view.
       bounds.extend(mark.location);
       marker = new window.google.maps.Marker({
         map: map,
         position: mark.location,
         title: mark.title,
-        animation: window.google.maps.Animation.DROP
+        animation: window.google.maps.Animation.DROP,
+        icon: 'https://image.ibb.co/h3WHsy/map_marker_hi.png'
       });
-      (function(marker) {
-        window.google.maps.event.addDomListener(document.getElementById('list').childNodes[i], 'click', function () {
-          map.fitBounds(bounds);
+      //Create new InfoWindow for each marker.
+      infoWindow = new window.google.maps.InfoWindow();
+      //Use an IIFE to close over the marker and link it with the list
+      //of places using the APIs DOMListener to trigger a click.
+      (marker => {
+        window.google.maps.event.addDomListener(document.getElementById('list').childNodes[i], 'click', () => {
           window.google.maps.event.trigger(marker, 'click', {});
         });
       })(marker);
-      marker.addListener('click', (function(marker) {
-        return function () {
-          infowindow.setContent(`<h3>${mark.title}</h3>
-                                  <p>Rating: *****<p>`);
-          infowindow.open(map, marker);
+      //Set the action to return when marker 'click' event occurs.
+      marker.addListener('click', (marker => {
+        return () => {
+          map.fitBounds(bounds);
+          zomatoAPI.getZomato(marker.title);
+          infoWindow.setContent(`<h2>${mark.title}</h2>
+          <p id='info-win'>Loading ZOMATO Info...<p>`);
+          setTimeout(() => {
+            infoWindow.open(map, marker);
+          }, 500);
+          
         }
       })(marker));
+
+    });
+
+    //Adjust map bounds after 0.5s.
+    setTimeout(() => map.fitBounds(bounds), 500);
+    //Add listener to Map to close info when clicking on Map.
+    map.addListener('click', () => {
+      infoWindow.close();
+    });
+    map.addListener('zoom_changed', () => {
+      infoWindow.close();
+    });
+  }
+
+  /* ********** FILTER PLACES LIST ************ */
+  /* ------------------------------------------ */
+  filterPlaces = (type, reInitializeMaps) => {
+    if(type === 'All') {
+      this.setState({
+        markers: this.state.myPlaces
+      }, () => {reInitializeMaps();});
+    } 
+    else { 
+      this.setState({
+        markers: this.state.myPlaces.filter(place => place.type === type)
+      }, () => {reInitializeMaps();});
     }
-  );
+    this.setState({placeType: type});
+  }
 
-  setTimeout(() => {map.fitBounds(bounds);}, 500);
-
-      map.addListener('zoom_changed', () => {
-      this.setState({
-        zoom: map.getZoom(),
-      });
-    });
-    
-    map.addListener('maptypeid_changed', () => {
-      this.setState({
-        maptype: map.getMapTypeId(),
-      });
-    });
-
-    // initialize the autocomplete functionality using the #pac-input input box
-    let inputNode = document.getElementById('pac-input');
-    map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(inputNode);
-    let autoComplete = new window.google.maps.places.Autocomplete(inputNode);
-    
-    autoComplete.addListener('place_changed', () => {
-      let place = autoComplete.getPlace();
-      let location = place.geometry.location;
-    
-      this.setState({
-        place_formatted: place.formatted_address,
-        place_id: place.place_id,
-        place_location: location.toString(),
-      });
-    });
-}
-
-  
   render() {
     return (
-      <div className="app">
-      
-      {/* HEADER */}
-        <header className="map-header">
-          <h1 className="map-title">Miejsca.</h1>
-        </header>
-      
-      {/* LIST SIDEBAR */}
-        <div className='sidebar'>
-          <h1>State</h1>
-            <p>
-              Zoom level: {this.state.zoom}<br />
-              Map type: {this.state.maptype}
-            </p>
-            <p>Place: {this.state.place_formatted}</p>
-            <p>Place ID: {this.state.place_id}</p>
-            <p>Location: {this.state.place_location}</p>
-            <ul className='places-list' id='list'>
-              {this.state.markers.map(place => 
-              <li key={place.id}>
-                <a className='place' onClick={() => console.log('clicked')}> 
-                  {place.title}
-                </a>
-              </li>)}
-            </ul>
-        </div>
-
-        {/* SEARCH BOX */}
-        <div className='pac-container'>
-        <input id='pac-input' type='text' placeholder='Enter a location' />
-        </div>
-
-        {/* MAP */}
-        <div className='map' id='map' />
+    <div className="app">
+      <Header />
+      <Sidebar
+        placeType={this.state.placeType}
+        zoom={this.state.zoom}
+        markers={this.state.markers}
+        filterPlaces={this.filterPlaces}
+        initializeMaps={this.initializeMaps}
+        populateMarkers={this.populateMarkers}
+      />
+      {/* MAP */}
+      <div className='map' id='map'>
+      <GoogleMapReact
+          bootstrapURLKeys={{ key: `AIzaSyCRFtX0yCoxc-RXXU5u2jGUkaQI2zM1bJk` }}
+          center={this.state.center}
+          zoom={this.state.zoom}
+          options={{
+            styles: MapCustom
+          }}
+        >
+          
+        </GoogleMapReact>
       </div>
+    </div>
     );
   }
 };

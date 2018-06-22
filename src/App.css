@@ -1,16 +1,25 @@
 .app {
+  height: 99.8vh;
   text-align: center;
+  background: url(./img/pattern.svg);
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  /* border: 1px solid green; */
 }
 
+/* ******************* HEADER ******************** */
+/* ******************* HEADER ******************** */
 .map-header {
-  background-color: #272B4D;
+  background-color: #E66919;
   height: 58px;
-  color: #EB4171;
-  border: 1px solid black;
+  color: #423B3A;
+  /* border: 1px solid black; */
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 6px 12px -2px rgba(0,0,0,0.75);
+  box-shadow: 1px 2px 21px 6px rgba(0,0,0,0.75);
+  font-family: 'Poor Story', cursive;
   font-size: 1.5em;
   z-index: 3;
 }
@@ -19,35 +28,55 @@
   font-size: 1.5em;
 }
 
+/* **************** MAP CONTAINER *************** */
+/* **************** MAP CONTAINER *************** */
 .map {
-  height: 87vh;
-  margin-left: 260px;
-  margin-right: 32px;
+  height: 86vh;
+  margin-left: 310px;
+  margin-right: 22px;
   margin-top: 32px;
+  margin-bottom: 32px;
+  background: rgba(230, 104, 25, 0.276);
   z-index: 1;
+  border: 1px solid rgb(52, 46, 45);
   border-radius: 5px;
   box-shadow: 2px 6px 12px -2px rgba(0,0,0,0.75);
 }
 
+/* ******************* SIDEBAR  ****************** */
+/* ******************* SIDEBAR  ****************** */
 .sidebar {
-  margin-top: 22px;
-  width: 260px;
+  margin-top: 30px;
+  margin-bottom: 32px;
+  width: 280px;
   left: 0;
-  height: 100%;
+  height: 86.6vh;
   position: fixed;
-  background-color: #A10628;
-  color: #0b0b0b;
-  /* box-shadow: 3px 3px 10px -3px rgba(0, 0, 0, 0.199); */
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  z-index: 1;
+  background-color: rgb(52, 46, 45);
+  box-shadow: 4px 6px 21px -1px rgba(0,0,0,0.75);
+  color: rgb(233, 233, 233);
+  padding-right: 5px;
+  z-index: 2;
+  border-radius: 0 12px 12px 0;
+}
+
+.places-heading {
+  background: rgba(250, 140, 61, 0.445);
+  height: 35px;
+  margin-top: -20px;
+  margin-bottom: 12px;
+  border-radius: 0 12px 0 0;
+  width: 285px;
+  box-shadow: inset 2px -6px 8px -5px rgba(0,0,0,0.75);
 }
 
 .places-list {
   list-style: none;
   margin: 0;
-  padding: 1px 0;
-  border-top: 1px solid rosybrown;
-}
+  padding: 0;
+  border-top: 1px solid #FA8D3D;
+  /* color: #2B2525; */
+ }
 
 .places-list > li {
   text-align: start;
@@ -55,19 +84,84 @@
   cursor: pointer;
   padding: 12px 0;
   text-transform: uppercase;
+  padding-left: 6px;
+  /* box-shadow: 3px 6px 12px -2px rgba(0,0,0,0.5); */
+  background-color: #423B3A;
+  margin: 1px 0 1px 0;
+  border-radius: 0 3px 6px 0;
 }
 
 .places-list > li:hover {
-  transform: scale(1.03);
-  background-color: #ad072b;
-  padding-left: 6px;  
+  transform: scale(1.025);
+  background-color: #FA8D3D;
+  padding-left: 11px;  
 }
 
-#pac-input {
-  margin-top: 9.8px;
-  margin-left: 9px;
-  height: 22px;
-  width: 220px;
-  box-shadow: 2px 6px 12px -2px rgba(0,0,0,0.75);
+.cusine-select select {
+  background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; 
+   width: 235px;
+   border-radius: 5px;
+   background-color: rgb(129, 121, 118);
+   margin-bottom: 12px;
 }
 
+.sidebar-info {
+  display: flex;
+  justify-content: flex-end;
+  text-align: end;
+  position: fixed;
+  bottom: 42px;
+  width: inherit;
+  font-size: 0.8em;
+  color: rgba(250, 140, 61, 0.55);
+}
+
+.sidebar-info p {
+  padding-right: 6px;
+}
+
+/* **************** INFO WINDOW ******************** */
+/* **************** INFO WINDOW ******************** */
+#info-win {
+  color: rgb(165, 94, 94);
+  width: 300px;
+  height: 100px !important;
+  letter-spacing: 2px;
+  padding-bottom: 12px;
+}
+
+.gm-style .gm-style-iw {
+  background-color: rgba(66, 59, 58, 0.995) !important;
+  color: whitesmoke;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 90px !important;
+  min-height: 10px !important;
+  padding-top: 1px !important;
+  padding-bottom: 6px !important;
+  display: block !important;
+  border-radius: 6px !important;
+  box-shadow: 8px -5px 23px -5px rgba(0,0,0,0.68) !important;
+  border-top: 6px solid #AB3D04 !important;
+}    
+
+.gm-style-iw + div {
+  display: none;
+}
+
+/*style the arrow*/
+.gm-style div div div div div div div div div {
+  background-color: #423B3A !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 0 !important;
+  color: #fff !important;
+  font-size: 16px;
+}

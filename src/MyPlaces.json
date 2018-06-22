@@ -1,10 +1,12 @@
-[{
-    "title": "Trattoria Czarna Owca",
+[
+  {
+    "title": "Baristacja - Cafe",
     "location": {
-      "lat": 53.134106,
-      "lng": 23.149176
+      "lat": 53.13405,
+      "lng": 23.161913
     },
-    "id": "ChIJJ4p3LQ78H0cR4SMhBMfmJNA"
+    "id": "ChIJkf3lbhv8H0cR9tHx76PLjaA",
+    "type": "Cafe"    
   },
   {
     "title": "Horyzont",
@@ -15,35 +17,57 @@
     "id": "ChIJ95xJiQT8H0cRCx8QvGnOYGc"
   },
   {
-    "title": "Sztuka Mięsa",
-    "location": {
-      "lat": 53.132465,
-      "lng": 23.14716
-    },
-    "id": "ChIJpWjYUA78H0cRYPWjnhoq6GI"
-  },
-  {
-    "title": "Miodosytnia - Kawiarnia Bistro",
-    "location": {
-      "lat": 53.134586,
-      "lng": 23.163202
-    },
-    "id": "ChIJay2afhv8H0cRkFUKx5xuinE"
-  },
-  {
-    "title": "Baristacja",
-    "location": {
-      "lat": 53.13405,
-      "lng": 23.161913
-    },
-    "id": "ChIJkf3lbhv8H0cR9tHx76PLjaA"
-  },
-  {
     "title": "Karczma Maciejówka",
     "location": {
       "lat": 53.12461,
       "lng": 23.151814
     },
-    "id": "ChIJH5c1Egf8H0cRbTlRSnjTZmI"
+    "id": "ChIJH5c1Egf8H0cRbTlRSnjTZmI",
+    "type": "Regional"
+  },
+  {
+    "title": "Miodosytnia",
+    "location": {
+      "lat": 53.134586,
+      "lng": 23.163202
+    },
+    "id": "ChIJay2afhv8H0cRkFUKx5xuinE",
+    "type": "Dining"
+  },
+  {
+    "title": "Pawilon Towarzyski",
+    "location": {
+      "lat": 53.1268469,
+      "lng": 23.163538600000038
+    },
+    "id": "ChIJay2afhv8H0cRkFUKxasdfasfY",
+    "type": "Dining"
+  },
+  {
+    "title": "Restauracja Sztuka Mięsa",
+    "location": {
+      "lat": 53.132465,
+      "lng": 23.14716
+    },
+    "id": "ChIJpWjYUA78H0cRYPWjnhoq6GI",
+    "type": "Dining"
+  },
+  {
+    "title": "Świętojańska 21",
+    "location": {
+      "lat": 53.124322,
+      "lng": 23.165606900000057
+    },
+    "id": "ChIJpWjYasda323528H0cRYPW6GVX",
+    "type": "Dining"
+  },
+  {
+    "title": "Trattoria Czarna Owca",
+    "location": {
+      "lat": 53.134106,
+      "lng": 23.149176
+    },
+    "id": "ChIJJ4p3LQ78H0cR4SMhBMfmJNA",
+    "type": "Dining"
   }
 ]
