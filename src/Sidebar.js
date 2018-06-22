@@ -17,7 +17,7 @@ export default class Sidebar extends Component {
             </div>
             <ul className='places-list' id='list'>
               {this.props.markers.map(place => 
-              <li key={place.id}>
+              <li key={place.id} place={place}>
                 <a className='place'> 
                   {place.title}
                 </a>

@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import MyPlaces from './MyPlaces.json'
 import './App.css'
 import MapCustom from './MapCustom'
 import GoogleMapReact from 'google-map-react'
 import * as zomatoAPI from './ZomatoAPI'
 import Marker from './Marker'
+import InfoWindow from './InfoWindow'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
 export default class App extends Component {
 
   state = {
-    zoom: 13,
+    zoom: 15,
     maptype: 'roadmap',
     center: {
       lat: 53.13248859999999,
@@ -19,7 +20,8 @@ export default class App extends Component {
     },
     myPlaces: [],
     markers: [],
-    placeType: 'All'
+    placeType: 'All',
+    selectedPlace: null
   }
 
   componentWillMount() {
@@ -31,6 +33,16 @@ export default class App extends Component {
 
   componentDidMount() {
   }
+
+  centerMap = () => {
+    console.log('Center!');
+    this.setState({
+      center: {
+        lat: 53.12998859999999,
+        lng: 23.156140300000056
+      }
+    });
+  }
   
   /* *************** CREATE MAP *************** */
   /* ------------------------------------------ */
@@ -39,7 +51,7 @@ export default class App extends Component {
       center: this.state.center,
       zoom: this.state.zoom,
       mapTypeId: this.state.maptype,
-      
+      styles: MapCustom,
       mapTypeControl: false,
       clickableIcons: false
     });
@@ -123,6 +135,19 @@ export default class App extends Component {
     this.setState({placeType: type});
   }
 
+  selectPlace = (place) => {
+    console.log(place);
+    this.setState(
+      {
+        selectedPlace: place,
+        center: {
+          lat: place.location.lat,
+          lng: place.location.lng
+        }
+      }
+    )
+  }
+
   render() {
     return (
     <div className="app">
@@ -142,17 +167,29 @@ export default class App extends Component {
           center={this.state.center}
           zoom={this.state.zoom}
           options={{
-            styles: MapCustom
+            styles: MapCustom,
+            clickableIcons: false
           }}
         >
-        {this.state.markers.map(marker => 
+        {this.state.markers.map(marker =>
+        <Fragment
+        key={marker.id}
+          lat={marker.location.lat}
+          lng={marker.location.lng}> 
           <Marker
+          draggable={true}
+          title={marker.title}
+          key={marker.id}
           lat={marker.location.lat}
           lng={marker.location.lng}
+          selectPlace={this.selectPlace}
+          marker={marker}
           />
-)}
-
+          <InfoWindow />
+          </Fragment>
+        )}
         </GoogleMapReact>
+        <div> <a onClick={this.centerMap}>Center</a> </div>
       </div>
     </div>
     );
