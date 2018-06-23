@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Marker extends Component {
+const Marker = (props) => {
 
-  render() {
+    let markerClass = 'marker drop';
+    props.selectedMarker ? markerClass += ' bounce' : markerClass = 'marker';
+
     return (
-      <div className='marker' onClick={() => this.props.selectPlace(this.props.marker)}></div>
+      <div className={markerClass} onClick={() => props.selectPlace(props.marker)}></div>
     )
-  }
 }
+
+export default Marker;

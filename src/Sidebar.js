@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
-import './App.css'
+import React from 'react'
 
-export default class Sidebar extends Component {
-  render() {
+const Sidebar = (props) => {
     return (
       <div className='sidebar'>
             <div className='places-heading'><h2>Places</h2></div>
             <div className="cusine-select">
-              <select value={this.props.placeType} onChange={event => this.props.filterPlaces(event.target.value)}>
+              <select value={props.placeType} onChange={event => props.filterPlaces(event.target.value)}>
               <option value="blank" disabled>Filter by cusine..</option>
               <option value="All">All</option>
               <option value="Cafe">Cafe</option>
@@ -16,17 +14,15 @@ export default class Sidebar extends Component {
               </select>
             </div>
             <ul className='places-list' id='list'>
-              {this.props.markers.map(place => 
-              <li key={place.id} onClick={() => this.props.selectPlace(place)}>
+              {props.markers.map(place => 
+              <li key={place.id} onClick={() => props.selectPlace(place)}>
                 <a className='place'> 
                   {place.title}
                 </a>
               </li>)}
             </ul>
-            <div className='sidebar-info'>
-            <p>MAP ZOOM: {this.props.zoom}</p>
-            </div>
         </div>
     )
   }
-}
+
+  export default Sidebar;

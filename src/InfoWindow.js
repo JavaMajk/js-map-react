@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class InfoWindow extends Component {
-  render() {
-    let windowClass = 'infoWindow';
-    if (this.props.selectedPlace) {
-      windowClass += ' selected';
-    }
+const InfoWindow = (props) => {
     return (
       <div className='infoWindow'>
-        <h2>{this.props.place.title}</h2>
-        <p id='info-win'>Loading ZOMATO data.</p>
+        <h2>{props.place.title}</h2>
+        <p id='info-win'>Loading ZOMATO data...</p>
       </div>
     )
   }
-}
+
+  export default InfoWindow;
