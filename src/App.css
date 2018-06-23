@@ -177,11 +177,18 @@
 }
 
 .infoWindow {
+  /* visibility: hidden; */
   height: 60px;
   width: 200px;
   background-color: #AB3D04;
-  transform: translate(-100px, -160px);
+  transform: translate(-100px, -169px);
   z-index: 999;
   border-radius: 5px;
   opacity: 0.9;
+}
+
+.infoWindow.selected {
+  visibility: visible;
+  background-color: #FA8D3D;
+  border: 3px solid black;
 }

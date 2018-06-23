@@ -121,32 +121,35 @@ export default class App extends Component {
 
   /* ********** FILTER PLACES LIST ************ */
   /* ------------------------------------------ */
-  filterPlaces = (type, reInitializeMaps) => {
+  filterPlaces = (type) => {
     if(type === 'All') {
       this.setState({
         markers: this.state.myPlaces
-      }, () => {reInitializeMaps();});
+      });
     } 
     else { 
       this.setState({
         markers: this.state.myPlaces.filter(place => place.type === type)
-      }, () => {reInitializeMaps();});
+      });
     }
     this.setState({placeType: type});
   }
 
   selectPlace = (place) => {
-    console.log(place);
-    this.setState(
-      {
-        selectedPlace: place,
-        center: {
-          lat: place.location.lat,
-          lng: place.location.lng
+    setTimeout(() => {console.log(place);
+      this.setState(
+        {
+          selectedPlace: place,
+          center: {
+            lat: place.location.lat,
+            lng: place.location.lng
+          }
         }
-      }
-    )
+      )}, 100)
+    
   }
+
+  closeWindows = () => this.state.selectedPlace ? this.setState({selectedPlace: null}) : null;
 
   render() {
     return (
@@ -157,8 +160,7 @@ export default class App extends Component {
         zoom={this.state.zoom}
         markers={this.state.markers}
         filterPlaces={this.filterPlaces}
-        initializeMaps={this.initializeMaps}
-        populateMarkers={this.populateMarkers}
+        selectPlace={this.selectPlace}
       />
       {/* MAP */}
       <div className='map' id='map'>
@@ -170,26 +172,24 @@ export default class App extends Component {
             styles: MapCustom,
             clickableIcons: false
           }}
+          onClick={this.closeWindows}
         >
+        <Fragment> 
         {this.state.markers.map(marker =>
-        <Fragment
-        key={marker.id}
-          lat={marker.location.lat}
-          lng={marker.location.lng}> 
           <Marker
-          draggable={true}
-          title={marker.title}
           key={marker.id}
-          lat={marker.location.lat}
-          lng={marker.location.lng}
-          selectPlace={this.selectPlace}
           marker={marker}
+          selectPlace={this.selectPlace}
           />
-          <InfoWindow />
-          </Fragment>
+          {marker === this.state.selectedPlace && <InfoWindow 
+            // selectedPlace={marker === this.state.selectedPlace} 
+          />}
+          {/* <InfoWindow 
+            // selectedPlace={marker === this.state.selectedPlace} 
+          /> */}
         )}
+        </Fragment>
         </GoogleMapReact>
-        <div> <a onClick={this.centerMap}>Center</a> </div>
       </div>
     </div>
     );
