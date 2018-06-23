@@ -124,48 +124,6 @@
   padding-right: 6px;
 }
 
-/* **************** INFO WINDOW ******************** */
-/* **************** INFO WINDOW ******************** */
-#info-win {
-  color: rgb(165, 94, 94);
-  width: 300px;
-  height: 100px !important;
-  letter-spacing: 2px;
-  padding-bottom: 12px;
-}
-
-.gm-style .gm-style-iw {
-  background-color: rgba(66, 59, 58, 0.995) !important;
-  color: whitesmoke;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 90px !important;
-  min-height: 10px !important;
-  padding-top: 1px !important;
-  padding-bottom: 6px !important;
-  display: block !important;
-  border-radius: 6px !important;
-  box-shadow: 8px -5px 23px -5px rgba(0,0,0,0.68) !important;
-  border-top: 6px solid #AB3D04 !important;
-}    
-
-.gm-style-iw + div {
-  display: none;
-}
-
-/*style the arrow*/
-.gm-style div div div div div div div div div {
-  background-color: #423B3A !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  top: 0 !important;
-  color: #fff !important;
-  font-size: 16px;
-}
-
 /* **************** MARKER *********************** */
 /* **************** MARKER *********************** */
 .marker {
@@ -177,14 +135,27 @@
 }
 
 .infoWindow {
-  /* visibility: hidden; */
-  height: 60px;
-  width: 200px;
+  white-space: nowrap;
+  display: inline-block;
+  padding: 6px 19px;
+  max-height: 80px;
+  min-width: 200px;
   background-color: #AB3D04;
-  transform: translate(-100px, -169px);
+  transform: translate(-39px, -215px);
   z-index: 999;
   border-radius: 5px;
-  opacity: 0.9;
+  opacity: 0.95;
+  box-shadow: 12px -7px 26px -4px rgba(0,0,0,0.75);
+}
+
+.infoWindow:after {
+  content:'';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  border-top: solid 30px #AB3D04;
+  border-left: solid 10px transparent;
+  border-right: solid 20px transparent;
 }
 
 .infoWindow.selected {

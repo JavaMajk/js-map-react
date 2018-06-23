@@ -136,7 +136,15 @@ export default class App extends Component {
   }
 
   selectPlace = (place) => {
-    setTimeout(() => {console.log(place);
+    setTimeout(() => {console.log(place.title);
+      
+          zomatoAPI.getZomato(place.title);
+          // infoWindow.setContent(`<h2>${mark.title}</h2>
+          // <p id='info-win'>Loading ZOMATO Info...<p>`);
+          // setTimeout(() => {
+          //   infoWindow.open(map, marker);
+          // }, 500);
+
       this.setState(
         {
           selectedPlace: place,
@@ -174,21 +182,21 @@ export default class App extends Component {
           }}
           onClick={this.closeWindows}
         >
-        <Fragment> 
         {this.state.markers.map(marker =>
-          <Marker
+        <Fragment
           key={marker.id}
+          lat={marker.location.lat}
+          lng={marker.location.lng}> 
+          <Marker
           marker={marker}
           selectPlace={this.selectPlace}
           />
-          {marker === this.state.selectedPlace && <InfoWindow 
-            // selectedPlace={marker === this.state.selectedPlace} 
+          {marker === this.state.selectedPlace && 
+          <InfoWindow 
+            place={marker}
           />}
-          {/* <InfoWindow 
-            // selectedPlace={marker === this.state.selectedPlace} 
-          /> */}
+          </Fragment>
         )}
-        </Fragment>
         </GoogleMapReact>
       </div>
     </div>
