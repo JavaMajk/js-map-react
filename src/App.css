@@ -32,9 +32,9 @@
 /* **************** MAP CONTAINER *************** */
 .map {
   height: 86vh;
-  margin-left: 310px;
+  margin-left: 305px;
   margin-right: 22px;
-  margin-top: 32px;
+  margin-top: 26px;
   margin-bottom: 32px;
   background: rgba(230, 104, 25, 0.276);
   z-index: 1;
@@ -46,7 +46,7 @@
 /* ******************* SIDEBAR  ****************** */
 /* ******************* SIDEBAR  ****************** */
 .sidebar {
-  margin-top: 30px;
+  margin-top: 26px;
   margin-bottom: 32px;
   width: 280px;
   left: 0;
@@ -120,6 +120,7 @@
   transform: translate(-15px, -48px);
   cursor: pointer;
 }
+
 .marker.bounce {
   animation: bounce 0.5s cubic-bezier(.17,.67,.83,.67);
   animation-direction: alternate;
@@ -136,6 +137,8 @@
   to   { transform: translate(-15px, -55px);  }
 }
 
+/* **************** INFO-WIN *********************** */
+/* **************** INFO-WIN *********************** */
 .infoWindow {
   opacity: 0.99;
   white-space: nowrap;
@@ -166,5 +169,115 @@
 
 .infoWindow p {
   color: #a55e5e;
+}
 
+/* **************** FOOTER *********************** */
+/* **************** FOOTER *********************** */
+.footer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  height: 16px;
+  width: 100%;
+  background: #423a3a;
+  color: #999;
+  padding: 6px;
+  font-size: 10px;
+  z-index: 99999;
+}
+
+.footer em {
+  color: #e66919;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.footer-right > a {
+  margin-left: 9px;
+  color: #999;
+}
+
+.footer-right > a:hover {
+  color: #e66919;
+}
+
+/* **************** RESPONSIV ******************** */
+/* **************** RESPONSIV ******************** */
+@media only screen and (max-width: 768px) {
+  .app {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .map-header {
+    width: 100%;
+    height: 32px;
+    font-size: 1.3em;
+  }
+
+  .sidebar {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 30vh !important;
+    overflow: hidden;
+    box-shadow: none;
+    border-bottom: 5px solid #FA8D3D;
+    border-radius: 0;
+  }
+
+  .places-heading {
+    visibility: hidden;
+  }
+
+  .cusine-select select {
+     height: 33px;
+     width: 80%;
+  }
+
+  .places-list {
+    overflow-y: scroll;
+  }
+
+  .places-list > li:hover {
+    transform: scale(1.0); 
+  }
+
+  .map {
+    margin-left: 3px;
+    margin-right: 4px;
+    width: 100%;
+    height: 62.6vh;
+    align-self: flex-end;
+    margin-bottom: 32px;
+  }
+
+  .infoWindow {
+    white-space: normal;
+    padding: 0 3px;
+    max-height: 120px;
+  }
+  
+}
+
+@media only screen and (max-height: 800px) {
+  .map {
+    margin-top: 14px;
+    height: 61vh;
+  }
+
+  .sidebar {
+    margin-top: 16px;
+    height: 81vh;
+    
+  }
 }

@@ -7,6 +7,7 @@ import * as zomatoAPI from './ZomatoAPI'
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Header from './Header'
+import Footer from './Footer'
 import Sidebar from './Sidebar'
 
 export default class App extends Component {
@@ -58,7 +59,6 @@ export default class App extends Component {
   /* ------------------------------------------ */
   selectPlace = (place) => {
     setTimeout(() => {
-      console.log(place.title);
       zomatoAPI.getZomato(place.title);
       this.setState({
         zoom: 15,
@@ -88,7 +88,7 @@ export default class App extends Component {
         filterPlaces={this.filterPlaces}
         selectPlace={this.selectPlace}
       />
-      {/* MAP */}
+      {/********************** MAP ***********************/}
       <div className='map'>
       <GoogleMapReact
           bootstrapURLKeys={{ key: `AIzaSyCRFtX0yCoxc-RXXU5u2jGUkaQI2zM1bJk` }}
@@ -121,8 +121,10 @@ export default class App extends Component {
               place={infoWin}
             />
         )}
-        </GoogleMapReact>
+        </GoogleMapReact> {/* END OF MAP COMPONENT */}
       </div>
+
+        <Footer />
     </div>
     );
   }
