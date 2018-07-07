@@ -4,6 +4,7 @@ import './App.css'
 import MapCustom from './MapCustom'
 import GoogleMapReact from 'google-map-react'
 import * as zomatoAPI from './ZomatoAPI'
+import * as ariaAlly from './AriaAlly';
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Header from './Header'
@@ -34,6 +35,9 @@ export default class App extends Component {
       markers: MyPlaces
     });
   }
+  componentDidMount() {
+    ariaAlly.labelIframe();
+    }
 
   /* ********** FILTER PLACES LIST ************ */
   /* ------------------------------------------ */

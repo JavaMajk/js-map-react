@@ -5,7 +5,7 @@ const Sidebar = (props) => {
       <div className='sidebar'>
             <div className='places-heading'><h2>Places</h2></div>
             <div className="cusine-select">
-              <select value={props.placeType} onChange={event => props.filterPlaces(event.target.value)}>
+              <select value={props.placeType} aria-label="Filter by category" onChange={event => props.filterPlaces(event.target.value)}>
               <option value="blank" disabled>Filter by cusine..</option>
               <option value="All">All</option>
               <option value="Cafe">Cafe</option>
