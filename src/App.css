@@ -32,9 +32,9 @@
 /* **************** MAP CONTAINER *************** */
 .map {
   height: 86vh;
-  margin-left: 310px;
+  margin-left: 305px;
   margin-right: 22px;
-  margin-top: 32px;
+  margin-top: 26px;
   margin-bottom: 32px;
   background: rgba(230, 104, 25, 0.276);
   z-index: 1;
@@ -46,7 +46,7 @@
 /* ******************* SIDEBAR  ****************** */
 /* ******************* SIDEBAR  ****************** */
 .sidebar {
-  margin-top: 30px;
+  margin-top: 26px;
   margin-bottom: 32px;
   width: 280px;
   left: 0;
@@ -88,7 +88,7 @@
   /* box-shadow: 3px 6px 12px -2px rgba(0,0,0,0.5); */
   background-color: #423B3A;
   margin: 1px 0 1px 0;
-  border-radius: 0 3px 6px 0;
+  border-radius: 0 0 6px 0;
 }
 
 .places-list > li:hover {
@@ -109,59 +109,188 @@
    margin-bottom: 12px;
 }
 
-.sidebar-info {
+/* **************** MARKER *********************** */
+/* **************** MARKER *********************** */
+.marker {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  height: 48px;
+  width: 30px;
+  background-image: url('https://image.ibb.co/h3WHsy/map_marker_hi.png');
+  transform: translate(-15px, -48px);
+  cursor: pointer;
+}
+
+.marker.bounce {
+  animation: bounce 0.5s cubic-bezier(.17,.67,.83,.67);
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drop {
+  from { transform: translate(-15px, -98px); }
+  to   { transform: translate(-15px, -48px);  }
+}
+
+@keyframes bounce {
+  from { transform: translate(-15px, -48px);  }
+  to   { transform: translate(-15px, -55px);  }
+}
+
+/* **************** INFO-WIN *********************** */
+/* **************** INFO-WIN *********************** */
+.infoWindow {
+  opacity: 0.99;
+  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  color: whitesmoke;
+  padding: 0 19px;
+  max-height: 80px;
+  min-width: 200px;
+  background-color: #423B3A;
+  transform: translate(-38px, -155px);
+  border-top: 6px solid #AB3D04;
+  border-radius: 5px;
+  box-shadow: 12px -7px 26px -4px rgba(0,0,0,0.75);
+  letter-spacing: 1px;
+  z-index: 999;
+}
+
+.infoWindow:after {
+  content:'';
+  position: absolute;
+  top: 100%;
+  left: 30px;
+  border-top: solid 25px #423B3A;
+  border-left: solid 10px transparent;
+  border-right: solid 20px transparent;
+}
+
+.infoWindow p {
+  color: #a55e5e;
+}
+
+/* **************** FOOTER *********************** */
+/* **************** FOOTER *********************** */
+.footer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  height: 21px;
+  width: 100%;
+  background: #423a3a;
+  color: rgb(187, 187, 187);
+  padding: 6px;
+  font-size: 10px;
+  z-index: 99999;
+}
+
+.footer em {
+  color: #e6925e;
+}
+
+.footer-right {
   display: flex;
   justify-content: flex-end;
-  text-align: end;
-  position: fixed;
-  bottom: 42px;
-  width: inherit;
-  font-size: 0.8em;
-  color: rgba(250, 140, 61, 0.55);
+  flex: 1;
+  font-size: 24px;
+  margin-right: 15px;
 }
 
-.sidebar-info p {
-  padding-right: 6px;
+.footer-right > a {
+  margin-left: 9px;
+  color: #999;
 }
 
-/* **************** INFO WINDOW ******************** */
-/* **************** INFO WINDOW ******************** */
-#info-win {
-  color: rgb(165, 94, 94);
-  width: 300px;
-  height: 100px !important;
-  letter-spacing: 2px;
-  padding-bottom: 12px;
+.footer-right > a:hover {
+  color: #e66919;
 }
 
-.gm-style .gm-style-iw {
-  background-color: rgba(66, 59, 58, 0.995) !important;
-  color: whitesmoke;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 90px !important;
-  min-height: 10px !important;
-  padding-top: 1px !important;
-  padding-bottom: 6px !important;
-  display: block !important;
-  border-radius: 6px !important;
-  box-shadow: 8px -5px 23px -5px rgba(0,0,0,0.68) !important;
-  border-top: 6px solid #AB3D04 !important;
-}    
+/* **************** RESPONSIV ******************** */
+/* **************** RESPONSIV ******************** */
+@media only screen and (max-width: 768px) {
+  .app {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-.gm-style-iw + div {
-  display: none;
+  .map-header {
+    width: 100%;
+    height: 32px;
+    font-size: 1.3em;
+  }
+
+  .sidebar {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 30vh !important;
+    overflow: hidden;
+    box-shadow: none;
+    border-bottom: 5px solid #FA8D3D;
+    border-radius: 0;
+  }
+
+  .places-heading {
+    visibility: hidden;
+  }
+
+  .cusine-select select {
+     height: 33px;
+     width: 80%;
+  }
+
+  .places-list {
+    overflow-y: scroll;
+  }
+
+  .places-list > li:hover {
+    transform: scale(1.0); 
+  }
+
+  .map {
+    margin-left: 3px;
+    margin-right: 4px;
+    width: 100%;
+    height: 62.6vh !important;
+    align-self: flex-end;
+    margin-bottom: 32px;
+  }
+
+  .infoWindow {
+    white-space: normal;
+    padding: 0 3px;
+    max-height: 120px;
+  }
+  
 }
 
-/*style the arrow*/
-.gm-style div div div div div div div div div {
-  background-color: #423B3A !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  top: 0 !important;
-  color: #fff !important;
-  font-size: 16px;
+@media only screen and (max-height: 900px) {
+  .map {
+    margin-top: 14px;
+    height: 86vh;
+  }
+
+  .sidebar {
+    margin-top: 16px;
+    height: 86vh;
+    
+  }
+}
+
+@media only screen and (max-height: 800px) {
+  .map {
+    margin-top: 14px;
+    height: 82vh;
+  }
+
+  .sidebar {
+    margin-top: 16px;
+    height: 82vh;
+    
+  }
 }

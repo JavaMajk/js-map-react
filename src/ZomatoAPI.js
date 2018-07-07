@@ -10,9 +10,8 @@ fetch(`https://developers.zomato.com/api/v2.1/search?q=${placeTitle}&lat=53.1322
 .then(info => {
   const infoWin = document.querySelector('#info-win');
   if(info.restaurants.length > 0) {
-    console.log(info.restaurants[0]);
-    const infoName = info.restaurants[0].restaurant.cuisines;
-    infoWin.textContent = infoName;
+    const foodInfo = info.restaurants[0].restaurant.cuisines;
+    infoWin.textContent = foodInfo;
     infoWin.style.color = '#E0E0E0';
   } else {
     infoWin.innerHTML = 'Not found on ZOMATO &#x2639;';

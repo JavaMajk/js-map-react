@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "google-map-react": "^1.0.4",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
-    "snazzy-info-window": "^1.1.1"
+    "snazzy-info-window": "^1.1.1",
+    "update": "^0.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
