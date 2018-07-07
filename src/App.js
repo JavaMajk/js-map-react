@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import MyPlaces from './MyPlaces.json'
 import './App.css'
 import MapCustom from './MapCustom'
-<<<<<<< HEAD
-||||||| merged common ancestors
-import GoogleMapReact from 'google-map-react';
-=======
 import GoogleMapReact from 'google-map-react'
->>>>>>> google-maps-react
 import * as zomatoAPI from './ZomatoAPI'
 import * as ariaAlly from './AriaAlly';
 import Marker from './Marker'
@@ -41,55 +36,17 @@ export default class App extends Component {
     });
   }
   componentDidMount() {
-<<<<<<< HEAD
-    this.initializeMaps();
-  }
-  
-  /* *************** CREATE MAP *************** */
-||||||| merged common ancestors
-    // this.initializeMaps();
-  }
-  
-  /* *************** CREATE MAP *************** */
-=======
     ariaAlly.labelIframe();
     }
 
   /* ********** FILTER PLACES LIST ************ */
->>>>>>> google-maps-react
   /* ------------------------------------------ */
-<<<<<<< HEAD
-  initializeMaps = () => {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: this.state.center,
-      zoom: this.state.zoom,
-      mapTypeId: this.state.maptype,
-      styles: MapCustom,
-      mapTypeControl: false,
-      clickableIcons: false
-    });
-    
-    map.addListener('zoom_changed', () => {
-||||||| merged common ancestors
-  initializeMaps = () => {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: this.state.center,
-      zoom: this.state.zoom,
-      mapTypeId: this.state.maptype,
-      
-      mapTypeControl: false,
-      clickableIcons: false
-    });
-    
-    map.addListener('zoom_changed', () => {
-=======
   filterPlaces = (type) => {
     if (type === 'All') {
       this.setState({
         markers: this.state.myPlaces
       });
     } else {
->>>>>>> google-maps-react
       this.setState({
         markers: this.state.myPlaces.filter(place => place.type === type)
       });
@@ -135,24 +92,6 @@ export default class App extends Component {
         filterPlaces={this.filterPlaces}
         selectPlace={this.selectPlace}
       />
-<<<<<<< HEAD
-      {/* MAP */}
-      <div className='map' id='map' />
-||||||| merged common ancestors
-      {/* MAP */}
-      <div className='map' id='map'>
-      <GoogleMapReact
-          bootstrapURLKeys={{ key: `AIzaSyCRFtX0yCoxc-RXXU5u2jGUkaQI2zM1bJk` }}
-          center={this.state.center}
-          zoom={this.state.zoom}
-          options={{
-            styles: MapCustom
-          }}
-        >
-          
-        </GoogleMapReact>
-      </div>
-=======
       {/********************** MAP ***********************/}
       <div className='map'>
       <GoogleMapReact
@@ -190,7 +129,6 @@ export default class App extends Component {
       </div>
 
         <Footer />
->>>>>>> google-maps-react
     </div>
     );
   }
