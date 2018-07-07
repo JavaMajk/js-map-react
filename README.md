@@ -5,7 +5,9 @@
 ---
 1. Download or clone the repo
 2. Install project dependencies uisng `npm install`
-3. Start the server with `serve -s build` and go to link in your browser: http://localhost:5000
+3. Build project with `npm run build`
+4. Install serve with `npm install -g serve`
+5. Start the server with `serve -s build` and go to link in your browser: http://localhost:5000
 
 ### Dependencies
 ---
