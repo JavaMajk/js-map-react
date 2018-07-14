@@ -17,4 +17,7 @@ fetch(`https://developers.zomato.com/api/v2.1/search?q=${placeTitle}&lat=53.1322
     infoWin.innerHTML = 'Not found on ZOMATO &#x2639;';
     infoWin.style.color = 'gray';
   }
-}).catch(e => window.alert('Failed to get data from ZOMATO. ' + e));
+}).catch(e => {
+  const infoWin = document.querySelector('#info-win');
+  infoWin.innerHTML = 'No Internet Connection';
+});

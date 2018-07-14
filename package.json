@@ -8,6 +8,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
+    "serve": "^9.2.0",
     "snazzy-info-window": "^1.1.1",
     "update": "^0.7.4"
   },
